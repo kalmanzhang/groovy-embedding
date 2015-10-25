@@ -1,5 +1,5 @@
 package hello
 
 class Dependency {
-    String message = 'Hello, dependency 1'
+    String message = 'Hello, dependency in hello.featurex package'
 }
