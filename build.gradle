@@ -1,0 +1,32 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.7.RELEASE")
+    }
+}
+
+
+apply plugin: 'groovy'
+apply plugin: 'spring-boot'
+
+mainClassName = 'hello.Application'
+
+repositories {
+    jcenter()
+}
+
+ext.sl4jVersion = '1.7.12'
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.4.4'
+    compile("org.springframework.boot:spring-boot-starter-web")
+
+
+    testCompile 'junit:junit:4.12'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.6'
+}
