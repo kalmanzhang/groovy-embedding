@@ -20,7 +20,7 @@ public class GreetingController {
     public String greeting1(@RequestParam(value="name", required=false, defaultValue="World") String name) throws Exception {
         GroovyScriptEngine engine = new GroovyScriptEngine("src\\main\\groovy");
         Binding binding = new Binding();
-        Object greeter = engine.run("hello/ReloadingTest.groovy", binding);
+        Object greeter = engine.run("hello/SampleScript.groovy", binding);
         return ((String) greeter);
     }
 
@@ -34,6 +34,7 @@ public class GreetingController {
     @ResponseBody
     public String greeting2(@RequestParam(value="name", required=false, defaultValue="World") String name) throws Exception {
         GroovyClassLoader groovyClassLoader = new GroovyClassLoader();
+        groovyClassLoader.clearCache();
         Class aClass = groovyClassLoader.parseClass(new File("src\\main\\groovy\\hello\\Greeter.groovy"));
         IGreeter  greeter = (IGreeter) aClass.newInstance();
         return greeter.sayHello();
