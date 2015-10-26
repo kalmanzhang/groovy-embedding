@@ -33,9 +33,8 @@ public class GreetingController {
     @RequestMapping(value = "/greeting2" ,method = RequestMethod.GET)
     @ResponseBody
     public String greeting2(@RequestParam(value="name", required=false, defaultValue="World") String name) throws Exception {
-        GroovyClassLoader groovyClassLoader = new GroovyClassLoader();
-        groovyClassLoader.clearCache();
-        Class aClass = groovyClassLoader.parseClass(new File("src\\main\\groovy\\hello\\Greeter.groovy"));
+        GroovyScriptEngine engine = new GroovyScriptEngine("src\\main\\groovy");
+        Class aClass =  engine.loadScriptByName("hello/Greeter.groovy");
         IGreeter  greeter = (IGreeter) aClass.newInstance();
         return greeter.sayHello();
     }
